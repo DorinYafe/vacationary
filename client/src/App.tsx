@@ -1,26 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, Suspense, } from 'react';
+import { withRouter, Switch, Route, Redirect, } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from './redux/actions/index';
+import Layout from './components/Layout/Layout';
+// import Vacations from './containers/Vacations/Vacations';
+// import Logout from './containers/Auth/Logout/Logout';
 
-function App() {
+// const Auth = React.lazy(() => {
+// return import('./containers/Auth/Auth');
+// });
+
+// const AddVacation = React.lazy(() => {
+// return import('./components/Vacation/AddVacation');
+// });
+
+// const Chart = React.lazy(() => {
+// return import('./components/UI/Chart/Chart');
+// });
+
+// const FavoritesVacations = React.lazy(() => {
+// return import('./containers/Vacations/FavoritesVacations');
+// });
+
+const App: React.FC = () => {
+
+  const dispatch = useDispatch();
+  const onTryAutoSignin = () => dispatch(actions.authCheckState());
+  const isAuthenticated = useSelector((state: any) => state.auth.token !== null);
+
+  useEffect(() => {
+    onTryAutoSignin();
+  }, [isAuthenticated]);
+
+  let routes = (
+    <Switch>
+      {/* <Route path='/auth' render={() => <Auth />} /> */}
+      {/* <Route path='/' exact component={Vacations} /> */}
+      <Redirect to='/' />
+    </Switch>
+  );
+
+  if (isAuthenticated) {
+    routes = (
+      <Switch>
+        {/* <Route path='/auth' render={() => <Auth />} /> */}
+        {/* <Route path='/add-vacation' render={() => <AddVacation />} /> */}
+        {/* <Route path='/chart' render={() => <Chart />} /> */}
+        {/* <Route path='/profile' render={() => <FavoritesVacations />} /> */}
+        {/* <Route path='/logout' component={Logout} /> */}
+        {/* <Route path='/' exact component={Vacations} /> */}
+        <Redirect to='/' />
+      </Switch>
+    )
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Layout>
+        <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
+      </Layout>
     </div>
   );
-}
+};
 
-export default App;
+export default withRouter(App);
