@@ -7,14 +7,14 @@ import { BrowserRouter, } from 'react-router-dom';
 import { Provider, } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers, } from 'redux';
 import authReducer from './redux/reducers/auth';
-// import vacationsReducer from './redux/reducers/vacations';
+import vacationsReducer from './redux/reducers/vacation';
 import thunk from 'redux-thunk';
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducers = combineReducers({
   auth: authReducer,
-  // vacation: vacationsReducer,
+  vacation: vacationsReducer,
 });
 
 const store = createStore(rootReducers, composeEnhancers(

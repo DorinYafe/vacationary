@@ -3,12 +3,12 @@ import { withRouter, Switch, Route, Redirect, } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from './redux/actions/index';
 import Layout from './components/Layout/Layout';
-// import Vacations from './containers/Vacations/Vacations';
-// import Logout from './containers/Auth/Logout/Logout';
+import Vacations from './components/Vacations/Vacations';
+import Logout from './components/Auth/Logout/Logout';
 
-// const Auth = React.lazy(() => {
-// return import('./containers/Auth/Auth');
-// });
+const Auth = React.lazy(() => {
+return import('./components/Auth/Auth');
+});
 
 // const AddVacation = React.lazy(() => {
 // return import('./components/Vacation/AddVacation');
@@ -34,8 +34,8 @@ const App: React.FC = () => {
 
   let routes = (
     <Switch>
-      {/* <Route path='/auth' render={() => <Auth />} /> */}
-      {/* <Route path='/' exact component={Vacations} /> */}
+      <Route path='/auth' render={() => <Auth />} />
+      <Route path='/' exact component={Vacations} />
       <Redirect to='/' />
     </Switch>
   );
@@ -43,12 +43,12 @@ const App: React.FC = () => {
   if (isAuthenticated) {
     routes = (
       <Switch>
-        {/* <Route path='/auth' render={() => <Auth />} /> */}
+        <Route path='/auth' render={() => <Auth />} />
         {/* <Route path='/add-vacation' render={() => <AddVacation />} /> */}
         {/* <Route path='/chart' render={() => <Chart />} /> */}
         {/* <Route path='/profile' render={() => <FavoritesVacations />} /> */}
-        {/* <Route path='/logout' component={Logout} /> */}
-        {/* <Route path='/' exact component={Vacations} /> */}
+        <Route path='/logout' component={Logout} />
+        <Route path='/' exact component={Vacations} />
         <Redirect to='/' />
       </Switch>
     )

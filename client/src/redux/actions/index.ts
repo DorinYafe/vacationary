@@ -6,14 +6,14 @@ export {
     authCheckState,
 } from './auth';
 
-// export {
-//     initVacations,
-//     fetchVacations,
-//     addVacationToFV,
-//     removeVacationFromFV,
-//     addVacation,
-//     deleteVacation,
-//     setAddVacationRedirectPath,
-//     updateVacation,
-//     getUserFavoritesVacations,
-// } from './vacations';
+export {
+    initVacations,
+    fetchVacations,
+    addVacationToFV,
+    removeVacationFromFV,
+    addVacation,
+    deleteVacation,
+    setAddVacationRedirectPath,
+    updateVacation,
+    getUserFavoritesVacations,
+} from './vacation';

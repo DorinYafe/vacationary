@@ -1,6 +1,6 @@
 import React, { useState, } from 'react';
 import classes from './Layout.module.css';
-import { connect, } from 'react-redux';
+import { useSelector, } from 'react-redux';
 import Toolbar from '../UI/Toolbar/Toolbar';
 import SideDrawer from '../UI/SideDrawer/SideDrawer';
 
@@ -11,8 +11,7 @@ interface Props {
 const Layout: React.FC<Props> = ({ children, }) => {
 
     const [sideDrawerIsVisable, setSideDrawerIsVisable] = useState(false);
-
-    const { isAuthenticated, }: any = mapStateToProps;
+    const isAuthenticated = useSelector((state: any) => state.auth.token !== null);
 
     const sideDrawerCloseHandler = () => {
         setSideDrawerIsVisable(false);
@@ -37,10 +36,4 @@ const Layout: React.FC<Props> = ({ children, }) => {
     );
 };
 
-const mapStateToProps = (state: any) => {
-    return {
-        isAuthenticated: state.auth.token !== null,
-    };
-};
-
-export default connect(mapStateToProps)(Layout);
+export default Layout;

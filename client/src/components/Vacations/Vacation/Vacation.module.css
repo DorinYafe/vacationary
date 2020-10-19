@@ -1,0 +1,171 @@
+.CardItem {
+    border: 1px solid #e1ebf2;
+    border-color: #c3cedb;
+    box-shadow: 0 0 12px 0 #e2e2e2;
+    width: 234px;
+    height: 400px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    text-align: left;
+    border-radius: 5px;
+}
+
+.IconWrap {
+    display: flex;
+    min-width: 100%;
+    justify-content: flex-end;
+}
+
+.CardItemImage {
+    position: relative;
+    z-index: 1;
+    height: 180px;
+}
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+}
+
+.CardItemContent {
+    padding: 10px 10px 7px 10px;
+    top: auto;
+    bottom: 3px;
+    position: relative;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    background-color: #fff;
+}
+
+.CardItemTopContent {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    box-sizing: border-box;
+    flex-shrink: 1;
+    display: block;
+}
+
+h6 {
+    font-size: 19px;
+    line-height: 1;
+    color: #000;
+    margin: 0;
+    height: 69px;
+    font-weight: normal;
+    display: block;
+    margin-block-start: 0.7em;
+    /* margin-block-end: 2.33em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+}
+
+.CardItem span {
+    float: left;
+    width: 100%;
+    position: relative;
+    color: #72849a;
+    font-size: 13px;
+    margin-top: 2px;
+    overflow: hidden;
+    height: 26px;
+}
+
+.CardItem ul {
+    text-align: left;
+    font-size: 13px;
+    line-height: 1;
+    color: #000;
+    float: left;
+    padding: 0;
+    margin: 0;
+    list-style: none outside none;
+    padding-right: 4px;
+}
+
+.CardItem li span {
+    color: #72849a;
+}
+
+.CardItemBottomContent {
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-top: 0.5rem;
+    top: 50px;
+}
+
+.BoxDate {
+    width: 70%;
+}
+
+.BoxPrice {
+    padding-left: 5px;
+    height: 50px;
+    border-left: 1px solid #e1e7ef;
+}
+
+.DealBox .CardItemContent .BoxPrice p:only-child {
+    position: absolute;
+    bottom: 3px;
+}
+
+.DealBox .CardItemContent p {
+    float: right;
+}
+
+.DealBox .CardItem p {
+    font-size: 13px;
+    color: #72849a;
+}
+
+.CardItem p {
+    margin: 0;
+}
+
+.DealBox .CardItemContent p span {
+    display: block;
+    color: #72849a;
+    padding-bottom: 7px;
+    letter-spacing: -0.2em;
+}
+
+.DealBox .CardItemContent p strong {
+    font-size: 24px;
+    color: #000;
+    font-weight: normal;
+}
+
+.DealBox .CardItem p strong {
+    float: none;
+    margin: 0;
+}
+
+.CardItem strong {
+    line-height: .8;
+}
+
+.DealBox .CardItemContent p strong sub {
+    font-size: 17px;
+}
+
+.CardItem strong sub {
+    vertical-align: baseline;
+}
+
+@media (max-width: 1279px) {
+    h6 {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .DealBox .CardItemContent p strong {
+        display: inline-block;
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+}
