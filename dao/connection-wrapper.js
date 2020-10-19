@@ -1,10 +1,11 @@
 const sql = require("mysql2");
+const { mySqlUser, mySqlPassword, mySqlDatabaseName, } = require('../keys/app-keys');
 
 const connection = sql.createConnection({
     host: "localhost",
-    user: "<username>",
-    password: "<password>",
-    database: "<databaseName>",
+    user: mySqlUser,
+    password: mySqlPassword,
+    database: mySqlDatabaseName,
 });
 
 connection.connect(err => {
