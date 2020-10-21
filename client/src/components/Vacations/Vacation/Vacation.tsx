@@ -5,7 +5,7 @@ import { IVacation, } from '../../../models/vacation';
 import Icon from '../../UI/Icon/Icon';
 import moment from 'moment';
 import * as actions from '../../../redux/actions/index';
-// import UpdateVacation from './UpdateVacation';
+import UpdateVacation from './UpdateVacation';
 
 interface Props {
     vacation: IVacation,
@@ -45,9 +45,9 @@ const Vacation: React.FC<Props> = ({ vacation, index, }: any) => {
 
     let updateVacationModal = null;
 
-    // if (isUpdated === true) {
-    //     updateVacationModal = <UpdateVacation vacation={vacation} index={index} />;
-    // };
+    if (isUpdated === true) {
+        updateVacationModal = <UpdateVacation vacation={vacation} index={index} />;
+    };
 
     return (
         <div className={classes.CardItem} key={id}>

@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios, { setAxiosHeaders } from '../../axios-instance';
 import { IVacation } from '../../models/vacation';
+import moment from 'moment';
 
 export const fetchVacationsStart = () => {
     return {
@@ -195,13 +196,13 @@ export const updateVacationFail = (error: any) => {
 };
 
 export const updateVacation = (description: any, image: any, startDate: any, endDate: any, price: any, id: any) => {
-    // console.log(vacation);
     const vacationForm = new FormData();
     vacationForm.append('description', description);
     vacationForm.append('image', image);
-    vacationForm.append('startDate', startDate);
-    vacationForm.append('endDate', endDate);
+    vacationForm.append('startDate', moment(startDate).format('YYYY-MM-DD'));
+    vacationForm.append('endDate', moment(endDate).format('YYYY-MM-DD'));
     vacationForm.append('price', price);
+    // console.log(vacationForm);
     return (dispatch: any) => {
         axios.put(`/vacations/update-vacation/${id}`, vacationForm)
             .then(res => {

@@ -37,4 +37,23 @@ router.post('/add-vacation', async (req, res) => {
     };
 });
 
+router.put('/update-vacation/:id', async (req, res) => {
+    try {
+        const vacation = req.body;
+        const image = req.files.image;
+        const extension = image.name.substring(image.name.lastIndexOf('.'), image.length);
+        const newUuid = uuid.v4();
+        vacation.id = +req.params.id;
+        image.mv(`./uploads/${newUuid}${extension}`);
+        vacation.image = newUuid + extension;
+        // console.log(vacation);
+        const updatedV = await vacationsLogic.updateVacation(vacation);
+        // console.log(updatedV);
+        res.status(210).send(updatedV);
+    }
+    catch (e) {
+        res.status(500).send(e.message);
+    };
+});
+
 module.exports = router;
