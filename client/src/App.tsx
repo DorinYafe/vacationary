@@ -7,16 +7,16 @@ import Vacations from './components/Vacations/Vacations';
 import Logout from './components/Auth/Logout/Logout';
 
 const Auth = React.lazy(() => {
-return import('./components/Auth/Auth');
+  return import('./components/Auth/Auth');
 });
 
 // const AddVacation = React.lazy(() => {
 // return import('./components/Vacation/AddVacation');
 // });
 
-// const Chart = React.lazy(() => {
-// return import('./components/UI/Chart/Chart');
-// });
+const Chart = React.lazy(() => {
+  return import('./components/UI/Chart/Chart');
+});
 
 // const FavoritesVacations = React.lazy(() => {
 // return import('./containers/Vacations/FavoritesVacations');
@@ -45,7 +45,7 @@ const App: React.FC = () => {
       <Switch>
         <Route path='/auth' render={() => <Auth />} />
         {/* <Route path='/add-vacation' render={() => <AddVacation />} /> */}
-        {/* <Route path='/chart' render={() => <Chart />} /> */}
+        <Route path='/chart' render={() => <Chart />} />
         {/* <Route path='/profile' render={() => <FavoritesVacations />} /> */}
         <Route path='/logout' component={Logout} />
         <Route path='/' exact component={Vacations} />
