@@ -15,4 +15,26 @@ router.get('/', async (req, res) => {
     };
 });
 
+router.post('/add-vacation', async (req, res) => {
+    try {
+        if (!fs.existsSync('./uploads')) {
+            fs.mkdirSync('./uploads');
+        };
+        const vacation = req.body;
+        const image = req.files.image;
+        const extension = image.name.substring(image.name.lastIndexOf('.'), image.length);
+        const newUuid = uuid.v4();
+        // const imgName = newUuid + extension;
+        image.mv(`./uploads/${newUuid}${extension}`);
+        vacation.image = newUuid + extension;
+        await vacationsLogic.addVacation(vacation);
+        const vacations = await vacationsLogic.getAllVacations();
+        global.socketServer.sockets.emit('add-vacation', vacations);
+        res.status(201).send(vacations);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    };
+});
+
 module.exports = router;

@@ -10,9 +10,9 @@ const Auth = React.lazy(() => {
   return import('./components/Auth/Auth');
 });
 
-// const AddVacation = React.lazy(() => {
-// return import('./components/Vacation/AddVacation');
-// });
+const AddVacation = React.lazy(() => {
+return import('./components/Vacations/Vacation/AddVacation');
+});
 
 const Chart = React.lazy(() => {
   return import('./components/UI/Chart/Chart');
@@ -44,7 +44,7 @@ const App: React.FC = () => {
     routes = (
       <Switch>
         <Route path='/auth' render={() => <Auth />} />
-        {/* <Route path='/add-vacation' render={() => <AddVacation />} /> */}
+        <Route path='/add-vacation' render={() => <AddVacation />} />
         <Route path='/chart' render={() => <Chart />} />
         {/* <Route path='/profile' render={() => <FavoritesVacations />} /> */}
         <Route path='/logout' component={Logout} />
