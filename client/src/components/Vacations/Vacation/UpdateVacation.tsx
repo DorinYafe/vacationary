@@ -5,6 +5,7 @@ import classes from './Vacation.module.css';
 import inputClasses from '../../UI/Input/Input.module.css';
 import moment from 'moment';
 import Button from '../../UI/Button/Button';
+import Icon from '../../UI/Icon/Icon';
 import * as actions from '../../../redux/actions/index';
 
 interface Props {
@@ -21,7 +22,7 @@ const UpdateVacation: React.FC<Props> = ({ vacation, index, }) => {
     const [endDate, setEndDate] = useState(vacation.endDate);
     const [price, setPrice] = useState(vacation.price);
     const [image, setImage]: any = useState(vacation.image);
-    const [isUpdated, setIsUpdated] = useState(false);
+    const [shouldRender, setShouldRender] = useState(true);
 
     const dispatch = useDispatch();
     const onUpdateVacation = (
@@ -33,65 +34,64 @@ const UpdateVacation: React.FC<Props> = ({ vacation, index, }) => {
     const submitHandler = (e: any) => {
         e.preventDefault();
         onUpdateVacation(description, image, startDate, endDate, price, id);
-        // console.log(description, image, startDate, endDate, price, id)
-        setIsUpdated(true);
+        setShouldRender(false);
     };
 
     return (
-        <div className={classes.Modal}>
-            <div className={inputClasses.Input}>
-                {/* {addVacationRedirect} */}
-                {/* <form> */}
-                <form onSubmit={submitHandler}>
-                    <input
-                        className={inputClasses.InputElement}
-                        type='text'
-                        placeholder='Destination'
-                        value={destination}
-                        onChange={(e) => setDestination(e.target.value)}
-                    />
-                    <input
-                        className={inputClasses.InputElement}
-                        type='textarea'
-                        placeholder='Description'
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                    <input
-                        className={inputClasses.InputElement}
-                        type='date'
-                        placeholder='Start Date'
-                        value={moment(startDate).format('YYYY-MM-DD')}
-                        onChange={(e) => setStartDate(e.target.value)}
-                    />
-                    <input
-                        className={inputClasses.InputElement}
-                        type='date'
-                        placeholder='End Date'
-                        value={moment(endDate).format('YYYY-MM-DD')}
-                        onChange={(e) => setEndDate(e.target.value)}
-                    />
-                    <input
-                        className={inputClasses.InputElement} type='number'
-                        placeholder='Price'
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                    />
-                    {/* <label className={classes.Label} htmlFor="imageInput"><i></i> &nbsp; Choose Image</label> */}
-                    {/* <input className={classes.InputElement} type='file' id='imageInput' accept='image/*' onChange={(e: any) => setImage(e.target.files[0])} /> */}
-                    <input
-                        className={inputClasses.InputElement}
-                        type='file'
-                        accept='image/*'
-                        onChange={(e: any) => setImage(e.target.files[0])}
-                    />
-                    {/* <button>Submit</button> */}
-                    <div style={{ textAlign: 'center' }}>
-                        <Button btnType='Success'>Save Changes</Button>
-                    </div>
-                </form>
-            </div>
-        </div>
+        shouldRender ?
+            <div className={classes.Modal}>
+                <div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: '0.5rem'}}>
+                    <Icon mode='delete' onClick={() => setShouldRender(false)} />
+                </div>
+                <div className={inputClasses.Input}>
+                    <form onSubmit={submitHandler}>
+                        <input
+                            className={inputClasses.InputElement}
+                            type='text'
+                            placeholder='Destination'
+                            value={destination}
+                            onChange={(e) => setDestination(e.target.value)}
+                        />
+                        <input
+                            className={inputClasses.InputElement}
+                            type='textarea'
+                            placeholder='Description'
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                        <input
+                            className={inputClasses.InputElement}
+                            type='date'
+                            placeholder='Start Date'
+                            value={moment(startDate).format('YYYY-MM-DD')}
+                            onChange={(e) => setStartDate(e.target.value)}
+                        />
+                        <input
+                            className={inputClasses.InputElement}
+                            type='date'
+                            placeholder='End Date'
+                            value={moment(endDate).format('YYYY-MM-DD')}
+                            onChange={(e) => setEndDate(e.target.value)}
+                        />
+                        <input
+                            className={inputClasses.InputElement} type='number'
+                            placeholder='Price'
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                        />
+                        <input
+                            className={inputClasses.InputElement}
+                            type='file'
+                            accept='image/*'
+                            onChange={(e: any) => setImage(e.target.files[0])}
+                        />
+                        <div style={{ textAlign: 'center' }}>
+                            <Button btnType='Success'>Save Changes</Button>
+                        </div>
+                    </form>
+                </div>
+            </div> :
+            null
     );
 };
 
