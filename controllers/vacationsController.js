@@ -56,4 +56,61 @@ router.put('/update-vacation/:id', async (req, res) => {
     };
 });
 
+router.post('/make-favorite', async (req, res) => {
+    try {
+        const token = req.headers.authorization;
+        const userID = map.checkMapForUserId(token);
+        let vacation = req.body;
+        let vacationID = vacation.id;
+        const favoriteV = await vacationsLogic.addVacationToFV(userID, vacationID);
+        // global.socketServer.sockets.emit('make-fv', favoriteV);
+        res.send(favoriteV);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    };
+});
+
+router.delete('/remove-vacation-from-fv/:id', async (req, res) => {
+    try {
+        const token = req.headers.authorization;
+        const userID = map.checkMapForUserId(token);
+        const vacationID = +req.params.id;
+        const unfaforiteV = await vacationsLogic.removeVacationFromFV(userID, vacationID);
+        res.send(unfaforiteV);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    };
+});
+
+router.delete('/:id', async (req, res) => {
+    try {
+        req.files = req.body;
+        const image = req.files;
+        const vacationID = +req.params.id;
+        await vacationsLogic.deleteVacation(vacationID);
+        fs.unlinkSync(`./uploads/${image.image}`);
+        res.send('Vacation deleted successfuly!');
+    }
+    catch (e) {
+        res.status(500).send(e);
+    };
+});
+
+router.get('/user-favorites-vacations', async (req, res) => {
+    try {
+        const token = req.headers.authorization;
+        // console.log(token);
+        const userID = map.checkMapForUserId(token);
+        console.log(userID);
+        const userFavoritesVacations = await vacationsLogic.getUserFavoriesVacations(userID);
+        // console.log(userFavoritesVacations);
+        res.status(200).send(userFavoritesVacations);
+    }
+    catch (e) {
+        res.status(500).send(e.message);
+    };
+});
+
 module.exports = router;

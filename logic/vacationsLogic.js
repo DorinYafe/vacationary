@@ -29,8 +29,45 @@ async function updateVacation(vacation) {
 //     }
 // );
 
+async function addVacationToFV(userID, vacationID) {
+    const isFollowed = await isVacationFollowedByUser(userID, vacationID);
+    if (!isFollowed) {
+        const favoriteV = await vacationsDao.addVacationToFV(userID, vacationID);
+        // console.log(favoriteV);
+        return favoriteV;
+    };
+};
+// addVacationToFV(45, 9);
+
+async function removeVacationFromFV(userID, vacationID) {
+    const followersAmount = await isFollowersAmountValid(vacationID);
+    const isFollowed = await isVacationFollowedByUser(userID, vacationID);
+    if (followersAmount && isFollowed) {
+        const unfavoriteV = await vacationsDao.removeVacationFromFV(userID, vacationID);
+        // console.log(unfavoriteV);
+        return unfavoriteV;
+    };
+};
+// removeVacationFromFV(45, 2);
+
+async function deleteVacation(vacationID) {
+    await vacationsDao.deleteVacation(vacationID);
+};
+// deleteVacation(4);
+
+async function getUserFavoriesVacations(userID) {
+    const userFavoritesVacations = await vacationsDao.getUserFavoriesVacations(userID);
+    // console.log(userFavoritesVacations);
+    return userFavoritesVacations;
+};
+// getUserFavoriesVacations(44);
+
 module.exports = {
     getAllVacations,
     addVacation,
     updateVacation,
+    addVacationToFV,
+    removeVacationFromFV,
+    deleteVacation,
+    getUserFavoriesVacations,
 };

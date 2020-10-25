@@ -65,8 +65,8 @@ const setAddVacationRedirectPath = (state: any, action: any) => {
 };
 
 const getUserFavoritesVacations = (state: any, action: any) => {
-    const userFavoritesVacations = state.vacations.filter((vacation: any) => action.vacations.map((v: any) => v.vacationID).includes(vacation.id));
-    const userUnfavoritesVacations = state.vacations.filter((vacation: any) => !action.vacations.map((v: any) => v.vacationID).includes(vacation.id));
+    const userFavoritesVacations = action.vacations;
+    const userUnfavoritesVacations = state.vacations.filter((vacation: any) => !action.vacations.map((v: any) => v.destination).includes(vacation.destination));
     const vacations = userFavoritesVacations.concat(userUnfavoritesVacations);
     return updateObject(state, {
         userFavoritesVacations: vacations,

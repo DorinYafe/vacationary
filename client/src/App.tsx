@@ -18,9 +18,9 @@ const Chart = React.lazy(() => {
   return import('./components/UI/Chart/Chart');
 });
 
-// const FavoritesVacations = React.lazy(() => {
-// return import('./containers/Vacations/FavoritesVacations');
-// });
+const FavoritesVacations = React.lazy(() => {
+return import('./components/Vacations/FavoritesVacations');
+});
 
 const App: React.FC = () => {
 
@@ -46,7 +46,7 @@ const App: React.FC = () => {
         <Route path='/auth' render={() => <Auth />} />
         <Route path='/add-vacation' render={() => <AddVacation />} />
         <Route path='/chart' render={() => <Chart />} />
-        {/* <Route path='/profile' render={() => <FavoritesVacations />} /> */}
+        <Route path='/profile' render={() => <FavoritesVacations />} />
         <Route path='/logout' component={Logout} />
         <Route path='/' exact component={Vacations} />
         <Redirect to='/' />
