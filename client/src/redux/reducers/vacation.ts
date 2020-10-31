@@ -3,7 +3,7 @@ import { updateObject, } from '../../utils/transform';
 
 const initialState = {
     vacations: [],
-    userFavoritesVacations: [],
+    // userFavoritesVacations: [],
     loading: false,
     error: null,
     addVacationRedirectPath: '/add-vacation',

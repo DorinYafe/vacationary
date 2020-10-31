@@ -11,13 +11,6 @@ const NavigationItems: React.FC<Props> = ({ isAuthenticated, }) => {
 
     const userType = useSelector((state: any) => state.auth.userType);
 
-
-    const customerNavigation = (
-        <>
-            <NavigationItem link='/profile'>My Vacations</NavigationItem>
-        </>
-    );
-
     const adminNavigation = (
         <>
             <NavigationItem link='add-vacation'>Add Vacation</NavigationItem>
@@ -29,8 +22,7 @@ const NavigationItems: React.FC<Props> = ({ isAuthenticated, }) => {
         <ul className={classes.NavigationItems}>
             <NavigationItem link='/'>Home</NavigationItem>
             {
-                isAuthenticated && userType === '"CUSTOMER"' ? customerNavigation :
-                    isAuthenticated && userType === '"ADMIN"' ? adminNavigation : null
+                isAuthenticated && userType === '"ADMIN"' ? adminNavigation : null
             }
             {
                 !isAuthenticated ?
