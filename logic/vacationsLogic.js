@@ -37,7 +37,7 @@ async function addVacationToFV(userID, vacationID) {
         return favoriteV;
     };
 };
-// addVacationToFV(45, 9);
+// addVacationToFV(44, 48);
 
 async function removeVacationFromFV(userID, vacationID) {
     const followersAmount = await isFollowersAmountValid(vacationID);
@@ -48,7 +48,7 @@ async function removeVacationFromFV(userID, vacationID) {
         return unfavoriteV;
     };
 };
-// removeVacationFromFV(45, 2);
+// removeVacationFromFV(44, 34);
 
 async function deleteVacation(vacationID) {
     await vacationsDao.deleteVacation(vacationID);

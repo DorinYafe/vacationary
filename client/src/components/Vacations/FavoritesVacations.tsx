@@ -9,12 +9,12 @@ import { IVacation } from '../../models/vacation';
 const FavoritesVacations: React.FC = () => {
 
     const dispatch = useDispatch();
-    const vacations = useSelector((state: any) => state.vacation.vacations);
+    // const vacations = useSelector((state: any) => state.vacation.vacations);
     const userFavoritesVacations = useSelector((state: any) => state.vacation.userFavoritesVacations);
     const loading = useSelector((state: any) => state.vacation.loading);
-    const onInitVacations = useCallback(
-        () => dispatch(actions.initVacations()),
-        [dispatch]);
+    // const onInitVacations = useCallback(
+    //     () => dispatch(actions.initVacations()),
+    //     [dispatch]);
     // const onGetUserFavoritesVacations = () => dispatch(actions.getUserFavoritesVacations());
     const onGetUserFavoritesVacations = useCallback(
         () => dispatch(actions.getUserFavoritesVacations()),
@@ -22,7 +22,7 @@ const FavoritesVacations: React.FC = () => {
 
     useEffect(() => {
         onGetUserFavoritesVacations();
-    }, [onInitVacations,]);
+    }, []);
 
     // console.log(userFavoritesVacations);
 
@@ -31,13 +31,13 @@ const FavoritesVacations: React.FC = () => {
     if (!loading) {
         vacationsView = (
             <div className={classes.Vacations}>
-                {userFavoritesVacations.map((vacation: IVacation, index: number) => (
+                {/* {userFavoritesVacations.map((vacation: IVacation, index: number) => (
                     <Vacation
                         key={vacation.id}
                         vacation={vacation}
                         index={index}
                     />
-                ))}
+                ))} */}
             </div>
         )
     }

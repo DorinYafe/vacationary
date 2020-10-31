@@ -46,6 +46,7 @@ const setVacations = (vacations: any) => {
 
 export const initVacations = () => {
     return (dispatch: any) => {
+        setAxiosHeaders();
         axios.get('/vacations')
             .then(response => {
                 dispatch(setVacations(response.data));
@@ -76,7 +77,9 @@ export const addVacationToFV = (vacation: IVacation) => {
         axios.post('/vacations/make-favorite', vacation)
             .then(res => {
                 const favoriteV = res.data;
+                // console.log(favoriteV);
                 dispatch(addVacationToFavoritesSuccess(favoriteV));
+                dispatch(initVacations());
             })
             .catch(e => {
                 dispatch(addVacationToFavoritesFail(e.message));
@@ -104,7 +107,9 @@ export const removeVacationFromFV = (vacation: IVacation, index: number) => {
         setAxiosHeaders();
         axios.delete(`/vacations/remove-vacation-from-fv/${vacation.id}`)
             .then(res => {
-                dispatch(removeVacationFromFavoritesSuccess(vacation, index));
+                // console.log(res);
+                dispatch(removeVacationFromFavoritesSuccess(res.data, index));
+                dispatch(initVacations());
             })
             .catch(e => {
                 dispatch(removeVacationFromFavoritesFail(e.message));

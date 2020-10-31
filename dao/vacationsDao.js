@@ -51,7 +51,7 @@ async function addVacationToFV(userID, vacationID) {
     // console.log(v);
     return v;
 };
-// addVacationToFV(44, 8);
+// addVacationToFV(44, 44);
 
 async function updateFollowedVacation(vacationID) {
     const sql = `update vacations set followersAmount = followersAmount+1 where id = ?`;
@@ -74,12 +74,13 @@ async function getVacationByID(vacationID) {
 async function removeVacationFromFV(userID, vacationID) {
     const sql = `delete from followed_vacations where userID = ? and vacationID = ?`;
     const params = [userID, vacationID];
-    const unfavoriteV = await connection.executeWithParams(sql, params);
+    await connection.executeWithParams(sql, params);
     await updateUnfolloedVacation(vacationID);
-    // console.log(favoriteV);
-    return unfavoriteV;
+    const v = await getVacationByID(vacationID);
+    // console.log(v);
+    return v;
 };
-// removeVacationFromFV(44, 2);
+// removeVacationFromFV(44, 33);
 
 async function updateUnfolloedVacation(vacationID) {
     const sql = `update vacations set followersAmount = followersAmount-1 where id = ?`;
@@ -125,18 +126,17 @@ async function deleteVacation(vacationID) {
 // deleteVacation(5);
 
 async function getUserFavoriesVacations(userID) {
-    const sql = `select V.destination as destination, V.description as description, V.image as image, 
-    V.startDate as startDate, V.endDate as endDate, V.price as price, V.followersAmount as followersAmount, 
-    FV.vacationID as id   
-    from vacations V, followed_vacations FV 
-    where V.id = FV.vacationID and FV.userID = ? 
-    order by FV.userID`;
+    const sql = `select V.id as id, V.destination as destination, V.description as description, V.image as image, 
+    V.startDate as startDate, V.endDate as endDate, V.price as price, V.followersAmount as followersAmount   
+    from vacations V left join followed_vacations FV 
+    on V.id = FV.vacationID and FV.userID = 44 
+    order by FV.userID desc`;
     const params = [userID];
     const userFavoritesVacations = await connection.executeWithParams(sql, params);
     // console.log(userFavoritesVacations);
     return userFavoritesVacations;
 };
-// getUserFavoriesVacations(44);
+// getUserFavoriesVacations(43);
 
 module.exports = {
     getAllVacations,

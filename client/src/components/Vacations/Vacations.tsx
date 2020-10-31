@@ -12,6 +12,7 @@ const Vacations: React.FC = () => {
 
     const dispatch = useDispatch();
     const vacations = useSelector((state: any) => state.vacation.vacations);
+    // console.log(vacations)
     const loading = useSelector((state: any) => state.vacation.loading);
     const onInitVacations = useCallback(
         () => dispatch(actions.initVacations()),

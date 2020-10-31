@@ -28,25 +28,13 @@ const fetchVacationsSuccess = (state: any, action: any) => {
 const fetchVacationsFail = (state: any) => { return updateObject(state, { loading: false }) };
 
 const addVacationToFavoritesSuccess = (state: any, action: any) => {
-    const updatedFavoriteV = state.vacations.filter((vacation: any) => vacation.id === action.vacation.id && vacation.followersAmount++);
-    const updatedVacationsState = updateObject(state.vacations, updatedFavoriteV);
-    const vacationsArray = Object.values(updatedVacationsState);
-    const updatedState = {
-        vacations: vacationsArray,
-        loading: false,
-    };
-    return updateObject(state, updatedState);
+    const updatedFavoriteV = state.vacations.filter((vacation: any) => vacation.id === action.vacation.id && (state.vacations[vacation.id] = action.vacation));
+    return updateObject(state, updatedFavoriteV);
 };
 
 const removeVacationFromFavoritesSuccess = (state: any, action: any) => {
-    const updatedUnfavoriteV = state.vacations.filter((vacation: any) => vacation.id === action.vacation.id && vacation.followersAmount--);
-    const updatedVacationsState = updateObject(state.vacations, updatedUnfavoriteV);
-    const vacationsArray = Object.values(updatedVacationsState);
-    const updatedState = {
-        vacations: vacationsArray,
-        loading: false,
-    };
-    return updateObject(state, updatedState);
+    const updatedUnfavoriteV = state.vacations.filter((vacation: any) => vacation.id === action.vacation.id && (state.vacations[vacation.id] = action.vacation));
+    return updateObject(state, updatedUnfavoriteV);
 };
 
 const removeVacationSuccess = (state: any, action: any) => {

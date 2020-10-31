@@ -6,12 +6,21 @@ const fs = require('fs');
 const uuid = require('uuid');
 
 router.get('/', async (req, res) => {
+    const token = req.headers.authorization;
+    let userID;
+    let vacations;
     try {
-        const vacations = await vacationsLogic.getAllVacations();
-        res.send(vacations);
+        if (!token) {
+            vacations = await vacationsLogic.getAllVacations();
+        } else if (!!token) {
+            userID = map.checkMapForUserId(token);
+            console.log(userID);
+            vacations = await vacationsLogic.getUserFavoriesVacations(userID);
+        }
+        res.status(200).send(vacations);
     }
     catch (e) {
-        res.status(500).send(e);
+        res.status(500).send(e.message);
     };
 });
 
@@ -64,7 +73,9 @@ router.post('/make-favorite', async (req, res) => {
         let vacationID = vacation.id;
         const favoriteV = await vacationsLogic.addVacationToFV(userID, vacationID);
         // global.socketServer.sockets.emit('make-fv', favoriteV);
-        res.send(favoriteV);
+        // console.log(favoriteV);
+        // console.log(res);
+        res.status(201).json(favoriteV);
     }
     catch (e) {
         res.status(500).send(e);
