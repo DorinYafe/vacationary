@@ -36,7 +36,7 @@ const Vacation: React.FC<Props> = ({ vacation, index, }: any) => {
     if (userType === '"ADMIN"') {
         icons = (
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Icon mode='edit' onClick={() => setIsUpdated(true)} />
+                <Icon mode='edit' onClick={() => setIsUpdated(!isUpdated)} />
                 {/* <Icon mode='edit' onClick={() => onUpdateVacation(vacation)} /> */}
                 <Icon mode='delete' onClick={() => onDeleteVacation(id, image)} />
             </div>

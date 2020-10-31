@@ -14,6 +14,7 @@ interface Props {
 };
 
 const UpdateVacation: React.FC<Props> = ({ vacation, index, }) => {
+    console.log(vacation)
 
     const { id, } = vacation;
     const [destination, setDestination] = useState(vacation.destination);
@@ -40,8 +41,8 @@ const UpdateVacation: React.FC<Props> = ({ vacation, index, }) => {
     return (
         shouldRender ?
             <div className={classes.Modal}>
-                <div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: '0.5rem'}}>
-                    <Icon mode='delete' onClick={() => setShouldRender(false)} />
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '0.5rem' }}>
+                    <Icon mode='delete' onClick={() => setShouldRender(!shouldRender)} />
                 </div>
                 <div className={inputClasses.Input}>
                     <form onSubmit={submitHandler}>
